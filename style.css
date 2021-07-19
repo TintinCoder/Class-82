@@ -1,0 +1,10 @@
+h1{
+    color: red;
+    font-size: 40px;
+    font-weight: bolder;
+}
+#myCanvas{
+    border: 2px solid black;
+    border-style: ridge;
+    border-width: 20px;
+}
