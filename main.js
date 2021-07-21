@@ -1,56 +1,50 @@
-// Defining Variables
+console.log("Class 82 | Paint");
+// Variables
+var mouseEvent = "empty";
+var last_x_position, last_y_position;
 var canvas = document.getElementById('myCanvas');
-var color;
 var ctx = canvas.getContext('2d');
-// Functions
-function blue() {
-    // Circle
-    color = "Blue";
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 3;
-    ctx.arc(150, 143, 40, 0, 2 * Math.PI)
-    ctx.stroke();
+var color = "black";
+var width_of_line = 2;
+// Mouse Events
+canvas.addEventListener("mousedown", my_mousedown);
+
+function my_mousedown(e) {
+    color = document.getElementById('color').value;
+    width_of_line = document.getElementById('width_of_line').value;
+    mouseEvent = "mousedown";
 }
-function yellow() {
-    // Circle
-    color = "Yellow";
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 3;
-    ctx.arc(200, 190, 40, 0, 2 * Math.PI)
-    ctx.stroke();
+canvas.addEventListener("mousemove", my_mousemove);
+
+function my_mousemove(e) {
+    current_x = e.clientX - canvas.offsetLeft;
+    current_y = e.clientY - canvas.offsetTop;
+    if (mouseEvent == "mousedown") {
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width_of_line;
+        console.log("Last Position Of X AND Y Coordinates")
+        console.log(last_x_position + last_y_position);
+        ctx.moveTo(last_x_position, last_y_position);
+        console.log("New X N Y Coordinates");
+        console.log(current_x, current_y);
+        ctx.lineTo(current_x, current_y);
+        ctx.stroke();
+    }
+    last_x_position = current_x;
+    last_y_position = current_y;
 }
-function black() {
-    // Circle
-    color = "Black";
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 3;
-    ctx.arc(250, 143, 40, 0, 2 * Math.PI)
-    ctx.stroke();
+
+canvas.addEventListener("mouseup", my_mouseup);
+function my_mouseup(e){
+    mouseEvent = "mouseup";
 }
-function green() {
-    // Circle
-    color = "Green";
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 3;
-    ctx.arc(300, 190, 40, 0, 2 * Math.PI)
-    ctx.stroke();
+
+canvas.addEventListener("mouseleave", my_mouseleave);
+function my_mouseleave(e) {
+    mouseEvent = "mouseleave";
 }
-function red() {
-    // Circle
-    color = "Red";
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 3;
-    ctx.arc(350, 143, 40, 0, 2 * Math.PI)
-    ctx.stroke();
+
+function wipeUp() {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 }
-// Running Functions
-blue();
-yellow();
-black();
-green();
-red();
